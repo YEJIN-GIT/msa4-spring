@@ -14,6 +14,8 @@ public class ValidationController {
     public String validation (
             @Valid @ModelAttribute ValidationRequest validationRequest
     ) {
+        // double etcErr = 2 / 0;  // 에러 발생 시키기
+
         return String.format("Email: %s, pw: %s, age: %d, name: %s"
             , validationRequest.email()
             , validationRequest.password()
