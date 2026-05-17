@@ -13,4 +13,9 @@ public interface EmployeeMapper {
     Employee findByPk(Long empId);
 
     int store(Employee employee);
+
+    int modify(Employee employee);
+
+    int hardDelete(Long empId);
+    int delete(Long empId);
 }

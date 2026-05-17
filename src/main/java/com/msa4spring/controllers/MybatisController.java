@@ -1,6 +1,8 @@
 package com.msa4spring.controllers;
 
 import com.msa4spring.entities.Employee;
+import com.msa4spring.requests.EmployeesDeleteRequest;
+import com.msa4spring.requests.EmployeesModifyRequest;
 import com.msa4spring.requests.EmployeesStoreRequest;
 import com.msa4spring.responses.ResponseDTO;
 import com.msa4spring.services.MybatisService;
@@ -30,7 +32,7 @@ public class MybatisController {
         return ResponseEntity.status(200).body(responseDTO);
     }
 
-    @PostMapping("/employees")
+    @PostMapping("/employees/store")
     public ResponseEntity< ResponseDTO<Employee>> store(
             @Valid @ModelAttribute EmployeesStoreRequest employeesStoreRequest
     ) {
@@ -43,6 +45,36 @@ public class MybatisController {
                 .build();
 
         // String responseDTO = employeesStoreRequest.toString();
+
+        return ResponseEntity.status(200).body(responseDTO);
+    }
+
+    @PostMapping("/employees/modify")
+    public ResponseEntity< ResponseDTO<Employee>> modify(
+            @Valid @ModelAttribute EmployeesModifyRequest employeesModifyRequest
+    ) {
+        Employee result = mybatisService.modify(employeesModifyRequest);
+
+        ResponseDTO<Employee> responseDTO = ResponseDTO.<Employee>builder()
+                .code("00")
+                .msg("정상 처리")
+                .data(result)
+                .build();
+
+        return ResponseEntity.status(200).body(responseDTO);
+    }
+
+    @PostMapping("/employees/delete")
+    public ResponseEntity< ResponseDTO<Employee>> delete(
+            @Valid @ModelAttribute EmployeesDeleteRequest employeesDeleteRequest
+    ) {
+        Employee result = mybatisService.delete(employeesDeleteRequest);
+
+        ResponseDTO<Employee> responseDTO = ResponseDTO.<Employee>builder()
+                .code("00")
+                .msg("정상 처리")
+                .data(result)
+                .build();
 
         return ResponseEntity.status(200).body(responseDTO);
     }

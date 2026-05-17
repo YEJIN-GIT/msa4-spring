@@ -53,5 +53,27 @@
             ,NOW()
         )
     </insert>
+
+    <update id="modify">
+        UPDATE employees
+        SET
+            birth       = #{birth}
+            ,updated_at = NOW()
+        WHERE emp_id = #{empId}
+    </update>
+
+    <!-- 물리적 삭제  -->
+    <delete id="hardDelete">
+        DELETE FROM employees
+        WHERE emp_id = #{empId}
+    </delete>
+
+    <!-- 소프트 삭제 -->
+    <update id="delete">
+        UPDATE employees
+        SET
+            deleted_at = NOW()
+        WHERE emp_id = #{empId}
+    </update>
 </mapper>
 
